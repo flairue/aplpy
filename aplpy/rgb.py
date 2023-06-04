@@ -225,7 +225,7 @@ def make_rgb_image(data, output, indices=(0, 1, 2), vmin_r=None, vmax_r=None,
             warnings.warn("AVM tags will not be embedded in RGB image, as only JPEG and PNG files are supported")
 
 
-def make_rgb_cube(files, output, north=True):
+def make_rgb_cube(files, output, north=True, hdu_in=0):
     """
     Make an RGB data cube from a list of three FITS images.
 
@@ -273,7 +273,7 @@ def make_rgb_cube(files, output, north=True):
         auto_rotate = True
 
     # Find optimal WCS and shape based on input images
-    wcs, shape = find_optimal_celestial_wcs(files, frame=frame, auto_rotate=auto_rotate)
+    wcs, shape = find_optimal_celestial_wcs(files, frame=frame, auto_rotate=auto_rotate, hdu_in=hdu_in)
     header = wcs.to_header()
 
     # Generate empty datacube
